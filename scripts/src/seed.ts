@@ -532,6 +532,18 @@ async function seed() {
     },
     {
       country: "United States",
+      city: "Las Vegas",
+      region: "Nevada",
+      visitedYear: 2023,
+      coverImageUrl: "/images/travel-las-vegas.jpg",
+      summary: "Las Vegas is a city that should not exist and fully commits to that energy. Shows, buffets, the Strip at 2am — it's overwhelming in the best way.",
+      tags: ["USA", "entertainment", "food", "nightlife"],
+      itinerary: [],
+      highlights: ["The Strip at night", "World-class shows and entertainment", "Food from every corner of the world"],
+      practicalInfo: "Everything is more expensive than it looks. Walk the Strip instead of taking cabs between casinos.",
+    },
+    {
+      country: "United States",
       city: "San Francisco",
       region: "California",
       visitedYear: 2022,
