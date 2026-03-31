@@ -35,6 +35,11 @@ export function TravelModal({ id, open, onOpenChange }: { id: number | null, ope
               <div className="aspect-[21/9] rounded-xl overflow-hidden shadow-sm">
                 <img src={data.coverImageUrl || "/images/travel-1.png"} alt={data.city} className="w-full h-full object-cover" />
               </div>
+              {(data as any).secondaryImageUrl && (
+                <div className="aspect-[21/9] rounded-xl overflow-hidden shadow-sm">
+                  <img src={(data as any).secondaryImageUrl} alt={`${data.city} — more`} className="w-full h-full object-cover" />
+                </div>
+              )}
               <div>
                 <h4 className="text-xl font-serif mb-3">The Experience</h4>
                 <p className="text-muted-foreground leading-relaxed">{data.summary}</p>
