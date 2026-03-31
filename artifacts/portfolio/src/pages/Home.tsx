@@ -10,7 +10,7 @@ import {
   useSubmitContact
 } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MapPin, Calendar, ArrowRight, ArrowUpRight, GraduationCap, BookOpen, ExternalLink, Mail, Linkedin, Instagram } from "lucide-react";
+import { MapPin, Calendar, ArrowRight, ArrowUpRight, GraduationCap, BookOpen, ExternalLink, Linkedin, Instagram } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -450,12 +450,6 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm shrink-0">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <a href="mailto:sasarahather@gmail.com" className="font-medium hover:underline">sasarahather@gmail.com</a>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm shrink-0">
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <a href="https://www.linkedin.com/in/sarah-ather/" target="_blank" rel="noreferrer" className="font-medium hover:underline">linkedin.com/in/sarah-ather</a>
@@ -594,9 +588,6 @@ export default function Home() {
           </a>
           <a href="https://www.instagram.com/madebysar__/" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">
             <Instagram className="w-5 h-5" />
-          </a>
-          <a href="mailto:sasarahather@gmail.com" className="hover:text-primary transition-colors">
-            <Mail className="w-5 h-5" />
           </a>
         </div>
         <p className="text-sm font-medium uppercase tracking-widest">© {new Date().getFullYear()} · Engineer · Designer · Explorer</p>

@@ -1,31 +1,37 @@
+import { Link, useLocation } from "wouter";
 import { Linkedin } from "lucide-react";
 
 export function NavBar() {
+  const [location] = useLocation();
+
   const links = [
-    { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
-    { name: "Travels", href: "#travels" },
-    { name: "Speaking", href: "#speaking" },
-    { name: "Crafts", href: "#crafts" },
-    { name: "Writing", href: "#writing" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/" },
+    { name: "Experience", href: "/experience" },
+    { name: "Travels", href: "/travels" },
+    { name: "Speaking", href: "/speaking" },
+    { name: "Crafts", href: "/crafts" },
+    { name: "Writing", href: "/writing" },
+    { name: "Contact", href: "/contact" },
   ];
+
+  const isActive = (href: string) =>
+    href === "/" ? location === "/" : location.startsWith(href);
 
   return (
     <nav className="fixed top-0 left-0 w-full z-40 bg-background/80 backdrop-blur-md border-b border-border/50 py-4">
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <a href="#about" className="font-serif font-bold text-xl text-primary tracking-tighter">
+        <Link href="/" className="font-serif font-bold text-xl text-primary tracking-tighter">
           Sarah Ather
-        </a>
+        </Link>
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors"
+              className={`text-sm font-medium transition-colors ${isActive(link.href) ? "text-primary border-b-2 border-primary pb-0.5" : "text-foreground/70 hover:text-primary"}`}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </div>
         <div className="flex items-center gap-3">
@@ -38,12 +44,9 @@ export function NavBar() {
           >
             <Linkedin className="w-4 h-4" />
           </a>
-          <a
-            href="#contact"
-            className="bg-primary text-primary-foreground px-5 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm"
-          >
+          <Link href="/contact" className="bg-primary text-primary-foreground px-5 py-2 rounded-full text-sm font-medium hover:bg-primary/90 transition-colors shadow-sm">
             Get in Touch
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
