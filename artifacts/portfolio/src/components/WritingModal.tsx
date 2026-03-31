@@ -39,7 +39,13 @@ export function WritingModal({ id, open, onOpenChange }: { id: number | null, op
               </DialogHeader>
               
               <div className="prose prose-stone dark:prose-invert max-w-none mt-8 font-sans text-foreground/90 text-lg leading-relaxed">
-                <div dangerouslySetInnerHTML={{ __html: data.content.replace(/\n/g, '<br/>') }} />
+                {data.content.split("\n").map((paragraph, i) =>
+                  paragraph.trim() ? (
+                    <p key={i} className="mb-4">{paragraph}</p>
+                  ) : (
+                    <br key={i} />
+                  )
+                )}
               </div>
               
               {data.tags && data.tags.length > 0 && (
