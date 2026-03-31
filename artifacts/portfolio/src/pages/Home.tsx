@@ -136,18 +136,17 @@ export default function Home() {
       {/* EDUCATION SECTION */}
       <section className="py-16 px-6 bg-muted/50 border-y border-border/40">
         <div className="container mx-auto max-w-4xl">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-12">
-            <div className="flex items-center gap-4 shrink-0">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Education</div>
-                <div className="font-serif text-xl font-bold text-foreground">University of Illinois at Chicago</div>
-              </div>
+          <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-12">
+            <div className="shrink-0">
+              <img
+                src="/images/graduation.jpg"
+                alt="Sarah at UIC graduation"
+                className="w-28 h-28 rounded-full object-cover object-top shadow-md border-4 border-background"
+              />
             </div>
-            <div className="hidden sm:block w-px h-12 bg-border/60"></div>
-            <div>
+            <div className="flex-1">
+              <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Education</div>
+              <div className="font-serif text-xl font-bold text-foreground mb-1">University of Illinois at Chicago</div>
               <div className="font-medium text-foreground">B.S. Computer Science · Minor in Linguistics</div>
               <div className="text-sm text-muted-foreground mt-1">Graduated May 2019 · UIC College of Engineering</div>
               <div className="flex flex-wrap gap-2 mt-3">
@@ -156,7 +155,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="sm:ml-auto shrink-0">
+            <div className="shrink-0">
               <a
                 href="https://engineering.uic.edu/undergraduate/w-fall22/"
                 target="_blank"
@@ -228,12 +227,19 @@ export default function Home() {
       {/* TRAVELS SECTION */}
       <section id="travels" className="py-32 px-6 bg-primary text-primary-foreground">
         <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-            <div>
-              <h2 className="text-5xl font-serif mb-4">Wanderlust</h2>
-              <p className="text-primary-foreground/80 max-w-md text-lg">
-                Collecting stories, stamps, and inspiration from around the globe. Every new city changes the way I see the world — and my work.
-              </p>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+            <div className="flex items-start gap-6">
+              <img
+                src="/images/travel-sedona.jpg"
+                alt="Sarah hiking in Sedona, AZ"
+                className="w-24 h-24 md:w-32 md:h-32 rounded-2xl object-cover shadow-xl shrink-0 border-2 border-primary-foreground/20"
+              />
+              <div>
+                <h2 className="text-5xl font-serif mb-4">Wanderlust</h2>
+                <p className="text-primary-foreground/80 max-w-md text-lg">
+                  Collecting stories, stamps, and inspiration from around the globe. Every new city changes the way I see the world — and my work.
+                </p>
+              </div>
             </div>
             <div className="text-sm uppercase tracking-widest text-primary-foreground/60">
               {travelsLoading ? "..." : `${travels?.length ?? 0}+ destinations`}
@@ -304,7 +310,7 @@ export default function Home() {
                   <div key={talk.id} className="border-b border-border/80 pb-6 group">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <div className="text-xs font-bold text-secondary uppercase tracking-wider mb-2">{talk.format}</div>
+                        <div className="text-xs font-bold text-secondary uppercase tracking-wider mb-2">{talk.format ? talk.format.charAt(0).toUpperCase() + talk.format.slice(1) : ""}</div>
                         <h4 className="text-xl font-serif font-bold group-hover:text-primary transition-colors leading-snug">{talk.talkTitle}</h4>
                         <div className="text-muted-foreground mt-2 flex flex-wrap items-center gap-4 text-sm font-medium">
                           <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> {talk.eventName}</span>
@@ -457,7 +463,7 @@ export default function Home() {
             </div>
 
             <a
-              href="https://calendly.com/sarah-ather"
+              href="https://calendly.com/sasarahather/30min"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-primary-foreground/90 transition-all shadow-lg"

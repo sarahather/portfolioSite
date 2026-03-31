@@ -605,7 +605,7 @@ async function seed() {
       talkTitle: "Wedding & Event Emcee",
       date: "2020-01-01",
       location: "Chicago Metro Area & Beyond",
-      format: "panel",
+      format: "emcee",
       audience: "Wedding guests, families, event attendees",
       description:
         "Emceed multiple South Asian wedding events and cultural celebrations — keeping the energy alive, honoring traditions, and making every moment feel personal and memorable for families.",

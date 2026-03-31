@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
 import { db, workExperienceTable } from "@workspace/db";
-import { asc, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 const router: IRouter = Router();
 
@@ -8,7 +8,10 @@ router.get("/work-experience", async (req, res): Promise<void> => {
   const experiences = await db
     .select()
     .from(workExperienceTable)
-    .orderBy(asc(workExperienceTable.id));
+    .orderBy(
+      desc(workExperienceTable.current),
+      desc(workExperienceTable.startDate)
+    );
   res.json(experiences);
 });
 
