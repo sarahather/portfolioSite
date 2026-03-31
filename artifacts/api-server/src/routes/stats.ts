@@ -5,7 +5,6 @@ import { count, eq } from "drizzle-orm";
 const router: IRouter = Router();
 
 router.get("/stats", async (req, res): Promise<void> => {
-  const [expResult] = await db.select({ count: count() }).from(workExperienceTable);
   const [travelResult] = await db.select({ count: count() }).from(travelsTable);
   const [speakingResult] = await db.select({ count: count() }).from(speakingTable);
   const [craftResult] = await db.select({ count: count() }).from(craftsTable);
@@ -14,8 +13,11 @@ router.get("/stats", async (req, res): Promise<void> => {
     .from(writingTable)
     .where(eq(writingTable.draft, false));
 
+  const careerStartYear = 2019;
+  const yearsExperience = new Date().getFullYear() - careerStartYear;
+
   res.json({
-    yearsExperience: 8,
+    yearsExperience,
     countriesVisited: travelResult?.count ?? 0,
     talkCount: speakingResult?.count ?? 0,
     craftCount: craftResult?.count ?? 0,

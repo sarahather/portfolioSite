@@ -51,73 +51,79 @@
 }
 
 :root {
-  --background: 40 40% 96%; /* #FAF6F0 Cream */
-  --foreground: 20 15% 15%; /* #2A2421 Dark Espresso */
-  
+  /* Palette: Chocolate Plum · Dusty Rose · Light Bronze · Tangerine Dream · Peach Glow */
+  --background: 28 60% 97%;          /* near-white warm peach */
+  --foreground: 350 16% 20%;         /* deep chocolate plum */
+
   --card: 0 0% 100%;
-  --card-foreground: 20 15% 15%;
-  --card-border: 34 25% 85%;
-  
+  --card-foreground: 350 16% 20%;
+  --card-border: 354 20% 88%;
+
   --popover: 0 0% 100%;
-  --popover-foreground: 20 15% 15%;
-  --popover-border: 34 25% 85%;
-  
-  --primary: 16 60% 49%; /* #C85A32 Terracotta */
+  --popover-foreground: 350 16% 20%;
+  --popover-border: 354 20% 88%;
+
+  --primary: 350 16% 33%;            /* Chocolate Plum #63474D */
   --primary-foreground: 0 0% 100%;
-  
-  --secondary: 125 10% 33%; /* #4C5D4E Sage */
+  --primary-border: hsl(350 16% 28%);
+
+  --secondary: 354 21% 57%;          /* Dusty Rose #AA767C */
   --secondary-foreground: 0 0% 100%;
-  
-  --muted: 34 25% 88%; /* #EAE3D9 */
-  --muted-foreground: 20 10% 40%;
-  
-  --accent: 43 65% 53%; /* #D4AF37 Golden Ochre */
-  --accent-foreground: 20 15% 15%;
-  
+  --secondary-border: hsl(354 21% 48%);
+
+  --muted: 354 20% 93%;
+  --muted-foreground: 350 10% 45%;
+  --muted-border: hsl(354 20% 85%);
+
+  --accent: 22 48% 68%;              /* Light Bronze #D6A184 */
+  --accent-foreground: 350 16% 20%;
+  --accent-border: hsl(22 48% 60%);
+
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  
-  --border: 34 25% 85%; /* #E0D6C8 */
-  --input: 34 25% 85%;
-  --ring: 16 60% 49%;
+  --destructive-border: hsl(0 84% 50%);
+
+  --border: 354 20% 88%;
+  --input: 354 20% 88%;
+  --ring: 350 16% 33%;
 
   --radius: 0.5rem;
-  
+
   --app-font-sans: 'DM Sans', sans-serif;
   --app-font-serif: 'Fraunces', serif;
   --app-font-mono: Menlo, monospace;
 }
 
 .dark {
-  --background: 20 15% 12%; 
-  --foreground: 40 40% 96%;
-  
-  --card: 20 10% 16%;
-  --card-foreground: 40 40% 96%;
-  --card-border: 20 10% 25%;
-  
-  --popover: 20 10% 16%;
-  --popover-foreground: 40 40% 96%;
-  --popover-border: 20 10% 25%;
-  
-  --primary: 16 60% 55%; 
+  --background: 350 16% 12%;
+  --foreground: 28 60% 95%;
+
+  --card: 350 12% 16%;
+  --card-foreground: 28 60% 95%;
+  --card-border: 350 12% 25%;
+
+  --popover: 350 12% 16%;
+  --popover-foreground: 28 60% 95%;
+  --popover-border: 350 12% 25%;
+
+  --primary: 354 21% 63%;
   --primary-foreground: 0 0% 100%;
-  
-  --secondary: 125 10% 45%; 
+
+  --secondary: 354 21% 57%;
   --secondary-foreground: 0 0% 100%;
-  
-  --muted: 20 10% 20%;
-  --muted-foreground: 40 20% 70%;
-  
-  --accent: 43 65% 53%; 
-  --accent-foreground: 20 15% 12%;
-  
+
+  --muted: 350 12% 20%;
+  --muted-foreground: 28 20% 65%;
+
+  --accent: 22 48% 68%;
+  --accent-foreground: 350 16% 12%;
+
   --destructive: 0 62% 30%;
   --destructive-foreground: 0 0% 100%;
-  
-  --border: 20 10% 25%;
-  --input: 20 10% 25%;
-  --ring: 16 60% 55%;
+
+  --border: 350 12% 25%;
+  --input: 350 12% 25%;
+  --ring: 354 21% 63%;
 }
 
 @layer base {
@@ -136,7 +142,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Subtle grain texture overlay */
 .noise-overlay {
   position: fixed;
   top: 0;
