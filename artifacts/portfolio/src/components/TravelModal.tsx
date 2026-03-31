@@ -1,5 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useGetTravel, getGetTravelQueryKey } from "@workspace/api-client-react";
+import type { ItineraryDay } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MapPin } from "lucide-react";
 
@@ -52,7 +53,7 @@ export function TravelModal({ id, open, onOpenChange }: { id: number | null, ope
                 <div>
                   <h4 className="text-xl font-serif mb-4">Itinerary</h4>
                   <div className="space-y-6">
-                    {data.itinerary.map((day: any) => (
+                    {data.itinerary.map((day: ItineraryDay) => (
                       <div key={day.day} className="border-l-2 border-primary/30 pl-4 pb-2">
                         <div className="font-bold text-lg mb-1 text-foreground">Day {day.day}: {day.title}</div>
                         <ul className="text-muted-foreground space-y-1 text-sm list-disc pl-4 mb-2">

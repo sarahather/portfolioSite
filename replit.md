@@ -123,3 +123,5 @@ Generated React Query hooks and fetch client from the OpenAPI spec.
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package.
+
+- `pnpm --filter @workspace/scripts run seed` — seed the database with realistic portfolio data (idempotent, safe to re-run)
