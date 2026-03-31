@@ -806,7 +806,7 @@ async function seed() {
       city: "Vancouver",
       region: "British Columbia",
       visitedYear: 2023,
-      coverImageUrl: "https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800",
+      coverImageUrl: "/images/travel-vancouver.jpg",
       summary: "Vancouver is what happens when a world-class city is surrounded by ocean, mountains, and rainforest. It's one of the most naturally beautiful cities anywhere.",
       tags: ["North America", "nature", "mountains", "food", "city"],
       itinerary: [],
