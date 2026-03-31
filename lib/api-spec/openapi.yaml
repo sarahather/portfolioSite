@@ -1,15 +1,29 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Portfolio API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: work-experience
+    description: Career and work experience
+  - name: travels
+    description: Travel destinations and itineraries
+  - name: speaking
+    description: Speaking engagements
+  - name: crafts
+    description: Custom craft products
+  - name: writing
+    description: Blog posts and articles
+  - name: contact
+    description: Contact form submissions
+  - name: stats
+    description: Portfolio summary stats
+
 paths:
   /healthz:
     get:
@@ -24,6 +38,201 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /work-experience:
+    get:
+      operationId: listWorkExperiences
+      tags: [work-experience]
+      summary: List work experiences
+      description: Returns all work experiences in reverse chronological order
+      responses:
+        "200":
+          description: List of work experiences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorkExperience"
+
+  /work-experience/{id}:
+    get:
+      operationId: getWorkExperience
+      tags: [work-experience]
+      summary: Get a single work experience
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Work experience
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkExperience"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /travels:
+    get:
+      operationId: listTravels
+      tags: [travels]
+      summary: List travel destinations
+      description: Returns all travel destinations with preview info
+      responses:
+        "200":
+          description: List of travel destinations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TravelDestination"
+
+  /travels/{id}:
+    get:
+      operationId: getTravel
+      tags: [travels]
+      summary: Get a travel destination with full itinerary
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Travel destination with itinerary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TravelDestinationDetail"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /speaking:
+    get:
+      operationId: listSpeakingEngagements
+      tags: [speaking]
+      summary: List speaking engagements
+      description: Returns all speaking engagements, most recent first
+      responses:
+        "200":
+          description: List of speaking engagements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SpeakingEngagement"
+
+  /crafts:
+    get:
+      operationId: listCrafts
+      tags: [crafts]
+      summary: List craft products
+      description: Returns all craft products
+      responses:
+        "200":
+          description: List of craft products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CraftProduct"
+
+  /writing:
+    get:
+      operationId: listWritingPosts
+      tags: [writing]
+      summary: List writing posts
+      description: Returns all writing posts/articles, most recent first
+      responses:
+        "200":
+          description: List of writing posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WritingPost"
+
+  /writing/{id}:
+    get:
+      operationId: getWritingPost
+      tags: [writing]
+      summary: Get a single writing post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Writing post
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WritingPost"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit a contact form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactFormBody"
+      responses:
+        "201":
+          description: Contact form submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactSubmission"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /stats:
+    get:
+      operationId: getPortfolioStats
+      tags: [stats]
+      summary: Get portfolio summary stats
+      description: Returns counts and highlights for the portfolio hero/about section
+      responses:
+        "200":
+          description: Portfolio stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PortfolioStats"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +243,324 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    WorkExperience:
+      type: object
+      properties:
+        id:
+          type: integer
+        company:
+          type: string
+        role:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: ["string", "null"]
+        current:
+          type: boolean
+        description:
+          type: string
+        highlights:
+          type: array
+          items:
+            type: string
+        technologies:
+          type: array
+          items:
+            type: string
+        logoUrl:
+          type: ["string", "null"]
+        location:
+          type: string
+      required:
+        - id
+        - company
+        - role
+        - startDate
+        - endDate
+        - current
+        - description
+        - highlights
+        - technologies
+        - logoUrl
+        - location
+
+    TravelDestination:
+      type: object
+      properties:
+        id:
+          type: integer
+        country:
+          type: string
+        city:
+          type: string
+        region:
+          type: ["string", "null"]
+        visitedYear:
+          type: integer
+        coverImageUrl:
+          type: string
+        summary:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - country
+        - city
+        - region
+        - visitedYear
+        - coverImageUrl
+        - summary
+        - tags
+
+    ItineraryDay:
+      type: object
+      properties:
+        day:
+          type: integer
+        title:
+          type: string
+        activities:
+          type: array
+          items:
+            type: string
+        tips:
+          type: ["string", "null"]
+      required:
+        - day
+        - title
+        - activities
+        - tips
+
+    TravelDestinationDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        country:
+          type: string
+        city:
+          type: string
+        region:
+          type: ["string", "null"]
+        visitedYear:
+          type: integer
+        coverImageUrl:
+          type: string
+        summary:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        itinerary:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItineraryDay"
+        highlights:
+          type: array
+          items:
+            type: string
+        practicalInfo:
+          type: ["string", "null"]
+      required:
+        - id
+        - country
+        - city
+        - region
+        - visitedYear
+        - coverImageUrl
+        - summary
+        - tags
+        - itinerary
+        - highlights
+        - practicalInfo
+
+    SpeakingEngagement:
+      type: object
+      properties:
+        id:
+          type: integer
+        eventName:
+          type: string
+        talkTitle:
+          type: string
+        date:
+          type: string
+        location:
+          type: string
+        format:
+          type: string
+          description: "e.g. keynote, panel, workshop, conference talk"
+        audience:
+          type: ["string", "null"]
+        description:
+          type: string
+        slidesUrl:
+          type: ["string", "null"]
+        recordingUrl:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        upcoming:
+          type: boolean
+      required:
+        - id
+        - eventName
+        - talkTitle
+        - date
+        - location
+        - format
+        - audience
+        - description
+        - slidesUrl
+        - recordingUrl
+        - imageUrl
+        - upcoming
+
+    CraftProduct:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        category:
+          type: string
+          description: "e.g. candles, jewelry, home decor, apparel"
+        description:
+          type: string
+        imageUrl:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        featured:
+          type: boolean
+      required:
+        - id
+        - name
+        - category
+        - description
+        - imageUrl
+        - tags
+        - featured
+
+    WritingPost:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        slug:
+          type: string
+        excerpt:
+          type: string
+        content:
+          type: string
+        publishedAt:
+          type: ["string", "null"]
+        tags:
+          type: array
+          items:
+            type: string
+        readingTimeMinutes:
+          type: integer
+        imageUrl:
+          type: ["string", "null"]
+        draft:
+          type: boolean
+      required:
+        - id
+        - title
+        - slug
+        - excerpt
+        - content
+        - publishedAt
+        - tags
+        - readingTimeMinutes
+        - imageUrl
+        - draft
+
+    ContactFormBody:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        category:
+          type: string
+          description: "speaking | recruiting | crafts | general"
+        subject:
+          type: string
+        message:
+          type: string
+      required:
+        - name
+        - email
+        - category
+        - subject
+        - message
+
+    ContactSubmission:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        category:
+          type: string
+        subject:
+          type: string
+        message:
+          type: string
+        submittedAt:
+          type: string
+      required:
+        - id
+        - name
+        - email
+        - category
+        - subject
+        - message
+        - submittedAt
+
+    PortfolioStats:
+      type: object
+      properties:
+        yearsExperience:
+          type: integer
+        countriesVisited:
+          type: integer
+        talkCount:
+          type: integer
+        craftCount:
+          type: integer
+        writingCount:
+          type: integer
+        menteeCount:
+          type: integer
+      required:
+        - yearsExperience
+        - countriesVisited
+        - talkCount
+        - craftCount
+        - writingCount
+        - menteeCount

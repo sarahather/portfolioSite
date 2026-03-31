@@ -1,0 +1,50 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "9Gl9LzJvuaDMQOCFkrfoL"
+uri = "file://artifacts/portfolio/public/images/hero.png"
+type = "image"
+title = "Hero portrait black woman tech"
+
+[[generated]]
+id = "tc7znWw5NB6b_0N3Z5FF7"
+uri = "file://artifacts/portfolio/public/images/travel-1.png"
+type = "image"
+title = "Travel destination Kyoto sunset"
+
+[[generated]]
+id = "l-uDveTmzOIB8eR0xCQak"
+uri = "file://artifacts/portfolio/public/images/travel-2.png"
+type = "image"
+title = "Travel destination Marrakech market"
+
+[[generated]]
+id = "HMzrVAS2aW8irMPgaSW-c"
+uri = "file://artifacts/portfolio/public/images/speaking-1.png"
+type = "image"
+title = "Speaking engagement stage"
+
+[[generated]]
+id = "uVaNoeMbwG4RTLduOT1KJ"
+uri = "file://artifacts/portfolio/public/images/craft-1.png"
+type = "image"
+title = "Craft pottery handmade"
+
+[[generated]]
+id = "8KYIPySUn_Goo7lxURP4F"
+uri = "file://artifacts/portfolio/public/images/craft-2.png"
+type = "image"
+title = "Craft artisanal candles"
+
+[[generated]]
+id = "GIRFUfe4OGizrZCX4K8_O"
+uri = "file://artifacts/portfolio/public/images/writing-1.png"
+type = "image"
+title = "Writing vintage desk"
+
+[[generated]]
+id = "PP5xePPDx3QtcNFrudN37"
+uri = "file://artifacts/portfolio/public/images/writing-2.png"
+type = "image"
+title = "Writing coding keyboard"
