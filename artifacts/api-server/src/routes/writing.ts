@@ -26,7 +26,7 @@ router.get("/writing/:id", async (req, res): Promise<void> => {
     .from(writingTable)
     .where(eq(writingTable.id, id));
 
-  if (!post) {
+  if (!post || post.draft) {
     res.status(404).json({ error: "Writing post not found" });
     return;
   }
