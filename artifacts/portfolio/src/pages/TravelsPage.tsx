@@ -10,19 +10,18 @@ export default function TravelsPage() {
   const [activeRegion, setActiveRegion] = useState<string>("All");
   const { data: travels, isLoading } = useListTravels();
 
-  const regions = ["All", ...Array.from(new Set(travels?.map(t => {
-    if (["Japan", "South Korea", "Malaysia", "Singapore", "Indonesia"].includes(t.country ?? "")) return "Asia";
-    if (["Italy", "Norway", "Switzerland", "Spain", "France"].includes(t.country ?? "")) return "Europe";
-    if (["Canada"].includes(t.country ?? "")) return "Canada";
-    return "USA";
-  }) ?? []))];
+  const ASIA = ["Japan", "South Korea", "Malaysia", "Singapore", "Indonesia"];
+  const EUROPE = ["Italy", "Norway", "Switzerland", "Spain", "France", "United Kingdom"];
+  const AMERICAS = ["Canada", "Mexico"];
+
+  const regions = ["All", "USA", "Asia", "Europe", "Americas"];
 
   const filtered = travels?.filter(t => {
     if (activeRegion === "All") return true;
-    if (activeRegion === "Asia") return ["Japan", "South Korea", "Malaysia", "Singapore", "Indonesia"].includes(t.country ?? "");
-    if (activeRegion === "Europe") return ["Italy", "Norway", "Switzerland", "Spain", "France"].includes(t.country ?? "");
-    if (activeRegion === "Canada") return t.country === "Canada";
-    return !["Japan", "South Korea", "Malaysia", "Singapore", "Indonesia", "Italy", "Norway", "Switzerland", "Spain", "France", "Canada"].includes(t.country ?? "");
+    if (activeRegion === "Asia") return ASIA.includes(t.country ?? "");
+    if (activeRegion === "Europe") return EUROPE.includes(t.country ?? "");
+    if (activeRegion === "Americas") return AMERICAS.includes(t.country ?? "");
+    return !ASIA.includes(t.country ?? "") && !EUROPE.includes(t.country ?? "") && !AMERICAS.includes(t.country ?? "");
   });
 
   return (
