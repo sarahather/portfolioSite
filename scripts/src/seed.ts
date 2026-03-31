@@ -682,11 +682,11 @@ async function seed() {
     },
     {
       country: "United States",
-      city: "Western NC",
+      city: "Asheville",
       region: "North Carolina",
       visitedYear: 2024,
       coverImageUrl: "/images/travel-western-nc.jpg",
-      summary: "Western NC — Asheville, Boone, the Blue Ridge Parkway — is the part of North Carolina that surprises people. Mountains, waterfalls, breweries, and an arts scene with genuine soul.",
+      summary: "Asheville, Boone, the Blue Ridge Parkway — western NC is the part of North Carolina that surprises people. Mountains, waterfalls, breweries, and an arts scene with genuine soul.",
       tags: ["USA", "mountains", "hiking", "nature", "arts", "NC"],
       itinerary: [],
       highlights: ["Blue Ridge Parkway at peak foliage", "Asheville River Arts District", "Hiking to Linville Falls and Hanging Rock"],
