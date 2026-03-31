@@ -7,6 +7,7 @@ import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Linkedin, Calendar } from "lucide-react";
 
 const contactSchema = z.object({
@@ -122,8 +123,21 @@ export default function ContactPage() {
                 </div>
                 <FormField control={form.control} name="subject" render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subject</FormLabel>
-                    <FormControl><Input placeholder="Speaking inquiry, commission, etc." {...field} /></FormControl>
+                    <FormLabel>Inquiry Type</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select an inquiry type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Speaking Engagement">Speaking Engagement</SelectItem>
+                        <SelectItem value="Job Opportunity">Job Opportunity</SelectItem>
+                        <SelectItem value="Craft Commission">Craft Commission</SelectItem>
+                        <SelectItem value="Collaboration / Partnership">Collaboration / Partnership</SelectItem>
+                        <SelectItem value="General Inquiry">General Inquiry</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )} />
