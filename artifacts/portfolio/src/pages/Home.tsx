@@ -351,15 +351,15 @@ export default function Home() {
           </div>
 
           {craftsLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-              {[1, 2, 3, 4].map(i => <Skeleton key={i} className="aspect-square rounded-2xl" />)}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} className="aspect-square rounded-2xl" />)}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-              {crafts?.slice(0, 4).map((craft, idx) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16">
+              {crafts?.slice(0, 6).map((craft, idx) => (
                 <div key={craft.id} className="group relative aspect-square rounded-2xl overflow-hidden bg-background shadow-lg">
                   <img
-                    src={idx === 0 ? "/images/craft-1.png" : idx === 1 ? "/images/craft-2.png" : craft.imageUrl || "/images/craft-1.png"}
+                    src={craft.imageUrl || "/images/craft-chips-bag.jpg"}
                     alt={craft.name}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
