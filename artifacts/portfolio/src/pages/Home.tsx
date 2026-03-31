@@ -365,7 +365,7 @@ export default function Home() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16">
               {crafts?.slice(0, 6).map((craft, idx) => (
-                <div key={craft.id} className="group relative aspect-square rounded-2xl overflow-hidden bg-background shadow-lg">
+                <Link key={craft.id} href="/crafts" className="group relative aspect-square rounded-2xl overflow-hidden bg-background shadow-lg block">
                   <img
                     src={craft.imageUrl || "/images/craft-chips-bag.jpg"}
                     alt={craft.name}
@@ -376,7 +376,7 @@ export default function Home() {
                     <div className="text-secondary font-bold text-xs uppercase tracking-widest mb-1">{craft.category}</div>
                     <h4 className="text-white font-serif text-2xl">{craft.name}</h4>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
@@ -403,16 +403,17 @@ export default function Home() {
               { label: "Travel & Identity", topic: "Lessons from 30+ destinations — what people around the world are doing differently, and what I carried home with me." },
               { label: "Building in Community", topic: "Lessons from co-founding a nonprofit, organizing tech talks, and making space where there wasn't one." },
             ].map(({ label, topic }) => (
-              <div key={label} className="bg-card border border-dashed border-border/80 rounded-3xl p-8 flex flex-col gap-4 opacity-80">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-muted-foreground" />
+              <Link key={label} href="/writing" className="bg-card border border-dashed border-border/80 rounded-3xl p-8 flex flex-col gap-4 opacity-80 hover:opacity-100 hover:border-primary/40 hover:shadow-md transition-all duration-300 group block">
+                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                  <BookOpen className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
                 <div className="text-xs font-bold uppercase tracking-widest text-secondary">{label}</div>
                 <p className="text-muted-foreground text-sm leading-relaxed">{topic}</p>
-                <div className="mt-auto pt-4 border-t border-border/50">
+                <div className="mt-auto pt-4 border-t border-border/50 flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Essay Coming Soon</span>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all duration-200" />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
