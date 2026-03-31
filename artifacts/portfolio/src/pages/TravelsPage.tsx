@@ -10,7 +10,7 @@ export default function TravelsPage() {
   const [activeRegion, setActiveRegion] = useState<string>("All");
   const { data: travels, isLoading } = useListTravels();
 
-  const ASIA = ["Japan", "South Korea", "Malaysia", "Singapore", "Indonesia"];
+  const ASIA = ["Japan", "South Korea", "Malaysia", "Singapore", "Indonesia", "Pakistan"];
   const EUROPE = ["Italy", "Norway", "Switzerland", "Spain", "France", "United Kingdom"];
   const AMERICAS = ["Canada", "Mexico"];
 
