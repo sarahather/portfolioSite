@@ -18,14 +18,15 @@ async function seed() {
       endDate: null,
       current: true,
       description:
-        "Designing and deploying cloud-based web applications for underwriters using React, JavaScript, Java, and Spring. Leading production deployments with zero defects and 100% uptime during business hours.",
+        "Designing and deploying cloud-based web applications for underwriters using React, JavaScript, Java, and Spring. Leading production deployments with zero defects and 100% uptime during business hours. Automating internal workflows and leveraging AI agents to eliminate repetitive manual work.",
       highlights: [
         "Designed and deployed ILAP, a cloud-based web application for underwriters using React, JavaScript, Java, and Spring",
         "Built scalable microservices and integrated APIs, improving interoperability and reducing redundancy across platforms",
         "Authored and maintained API documentation using Postman alongside extensive Confluence resources",
         "Integrated SonarQube into CI/CD pipelines, performing penetration testing and maintaining 97%+ JUnit test coverage",
         "Spearheaded production deployments with zero defects and 100% uptime during business hours",
-        "Led migration from Concourse to GitHub Actions, reducing deployment cycles by 25%",
+        "Led migration from Concourse to GitHub Actions, reducing deployment cycles by 25% and automating deployment, test, and environment workflows end-to-end",
+        "Built AI agent-powered scripts using Claude to automate database change communication to downstream support teams, eliminating manual coordination handoffs",
       ],
       technologies: ["React", "JavaScript", "Java", "Spring Boot", "SonarQube", "GitHub Actions", "Postman", "Claude", "GitHub Copilot", "Adobe Designer", "Echo API"],
       logoUrl: null,
