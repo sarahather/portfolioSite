@@ -339,6 +339,7 @@ async function seed() {
       visitedYear: 2025,
       coverImageUrl: "/images/travel-banff.jpg",
       secondaryImageUrl: "/images/travel-banff-2.jpg",
+      galleryImages: ["/images/travel-banff-3.jpg"],
       summary: "Banff looks like it was designed by someone who had never seen nature before and overcorrected wildly. Turquoise lakes, glacier peaks, elk walking downtown.",
       tags: ["North America", "mountains", "hiking", "nature"],
       itinerary: [

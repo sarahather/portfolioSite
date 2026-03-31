@@ -74,16 +74,48 @@ export default function TravelCityPage() {
 
             <p className="text-xl text-muted-foreground leading-relaxed font-serif">{data.summary}</p>
 
-            {(data as any).secondaryImageUrl && (
-              <div className="grid grid-cols-2 gap-4">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img src={data.coverImageUrl || ""} alt={data.city} className="w-full h-full object-cover" />
+            {(() => {
+              const allPhotos: string[] = [
+                (data as any).secondaryImageUrl,
+                ...((data as any).galleryImages ?? []),
+              ].filter(Boolean);
+              if (allPhotos.length === 0) return null;
+              if (allPhotos.length === 1) return (
+                <div className="aspect-[16/9] rounded-2xl overflow-hidden">
+                  <img src={allPhotos[0]} alt={`${data.city}`} className="w-full h-full object-cover" />
                 </div>
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img src={(data as any).secondaryImageUrl} alt={`${data.city} — more`} className="w-full h-full object-cover" />
+              );
+              if (allPhotos.length === 2) return (
+                <div className="grid grid-cols-2 gap-4">
+                  {allPhotos.map((src, i) => (
+                    <div key={i} className="aspect-[4/3] rounded-2xl overflow-hidden">
+                      <img src={src} alt={`${data.city} ${i + 1}`} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
                 </div>
-              </div>
-            )}
+              );
+              if (allPhotos.length === 3) return (
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="row-span-2 rounded-2xl overflow-hidden">
+                    <img src={allPhotos[0]} alt={`${data.city} 1`} className="w-full h-full object-cover" />
+                  </div>
+                  {allPhotos.slice(1).map((src, i) => (
+                    <div key={i} className="aspect-[4/3] rounded-2xl overflow-hidden">
+                      <img src={src} alt={`${data.city} ${i + 2}`} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+              );
+              return (
+                <div className="columns-2 gap-4 space-y-4">
+                  {allPhotos.map((src, i) => (
+                    <div key={i} className="break-inside-avoid rounded-2xl overflow-hidden">
+                      <img src={src} alt={`${data.city} ${i + 1}`} className="w-full h-auto object-cover" />
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
 
             {data.highlights && data.highlights.length > 0 && (
               <div>

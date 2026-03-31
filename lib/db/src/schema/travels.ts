@@ -10,6 +10,7 @@ export const travelsTable = pgTable("travels", {
   visitedYear: integer("visited_year").notNull(),
   coverImageUrl: text("cover_image_url").notNull(),
   secondaryImageUrl: text("secondary_image_url"),
+  galleryImages: text("gallery_images").array().notNull().default([]),
   summary: text("summary").notNull(),
   tags: text("tags").array().notNull().default([]),
   itinerary: jsonb("itinerary").notNull().default([]),
