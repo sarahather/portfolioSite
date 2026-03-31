@@ -391,8 +391,8 @@ export default function Home() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
-              { label: "Career & Leadership", topic: "On mentorship, intern programs, and what nobody tells you about climbing the ladder." },
-              { label: "Travel & Identity", topic: "Dispatches from 30+ destinations — what it means to move through the world as yourself." },
+              { label: "Career & Leadership", topic: "On mentorship, intern programs, and learning to develop and value your own perspective in rooms that weren't built for you." },
+              { label: "Travel & Identity", topic: "Lessons from 30+ destinations — what people around the world are doing differently, and what I carried home with me." },
               { label: "Building in Community", topic: "Lessons from co-founding a nonprofit, organizing tech talks, and making space where there wasn't one." },
             ].map(({ label, topic }) => (
               <div key={label} className="bg-card border border-dashed border-border/80 rounded-3xl p-8 flex flex-col gap-4 opacity-80">
@@ -446,7 +446,7 @@ export default function Home() {
                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <span className="font-medium">Somewhere between the Blue Ridge Parkway & Lake Shore Drive</span>
+                <span className="font-medium">Raleigh, NC & Chicago, IL <span className="font-normal text-sm text-primary-foreground/70 ml-1">· open to travel</span></span>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm shrink-0">

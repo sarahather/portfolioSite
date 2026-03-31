@@ -562,7 +562,7 @@ async function seed() {
       eventName: "WiTech",
       talkTitle: "Navigating Tech as a Muslim Woman in STEM",
       date: "2022-10-01",
-      location: "Chicago, IL",
+      location: "Virtual",
       format: "conference talk",
       audience: "Women in tech, underrepresented minorities in STEM",
       description:
@@ -590,7 +590,7 @@ async function seed() {
       eventName: "8th Grade Commencement Ceremony",
       talkTitle: "8th Grade Commencement Address",
       date: "2021-06-01",
-      location: "Chicago, IL",
+      location: "Villa Park, IL",
       format: "keynote",
       audience: "8th grade graduates, families, faculty",
       description:
