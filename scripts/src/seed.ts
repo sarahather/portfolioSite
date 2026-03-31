@@ -653,6 +653,20 @@ async function seed() {
       imageUrl: "/images/speaking-mwa-flyer.jpg",
       upcoming: false,
     },
+    {
+      eventName: "ABIdotCHI",
+      talkTitle: "Speaker — ABIdotCHI",
+      date: "2016-01-01",
+      location: "Google Chicago, Chicago, IL",
+      format: "conference talk",
+      audience: "Tech students, early-career engineers, women in computing",
+      description:
+        "Speaker at ABIdotCHI, the Chicago chapter of the Anita Borg Institute — a community event bringing together women and underrepresented technologists to connect, learn, and lift each other up. Hosted at Google Chicago.",
+      slidesUrl: null,
+      recordingUrl: null,
+      imageUrl: null,
+      upcoming: false,
+    },
   ]);
   console.log("  ✓ Speaking engagements seeded");
 
