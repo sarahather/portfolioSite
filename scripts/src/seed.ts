@@ -128,7 +128,7 @@ async function seed() {
       city: "Tokyo",
       region: "Kanto",
       visitedYear: 2025,
-      coverImageUrl: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800",
+      coverImageUrl: "/images/travel-tokyo.jpg",
       summary: "Tokyo is sensory overload in the best possible way — neon lights and quiet temple gardens existing in perfect tension.",
       tags: ["Asia", "food", "culture", "city"],
       itinerary: [
@@ -190,7 +190,7 @@ async function seed() {
       city: "Florence",
       region: "Tuscany",
       visitedYear: 2023,
-      coverImageUrl: "https://images.unsplash.com/photo-1541370976299-4d24be5d2129?w=800",
+      coverImageUrl: "/images/travel-florence.jpg",
       summary: "Florence is smaller than you expect and more beautiful than you can prepare for. Every street corner is a painting.",
       tags: ["Europe", "art", "food", "history"],
       itinerary: [
@@ -264,7 +264,7 @@ async function seed() {
       city: "Lauterbrunnen",
       region: "Bernese Oberland",
       visitedYear: 2023,
-      coverImageUrl: "https://images.unsplash.com/photo-1580137189272-c9379f8864fd?w=800",
+      coverImageUrl: "/images/travel-lauterbrunnen.jpg",
       summary: "72 waterfalls tumbling down sheer cliff walls into a valley so green it looks fictional. Lauterbrunnen is the Switzerland no one tells you about.",
       tags: ["Europe", "waterfalls", "nature", "hiking"],
       itinerary: [
@@ -308,7 +308,7 @@ async function seed() {
       city: "Seville",
       region: "Andalusia",
       visitedYear: 2019,
-      coverImageUrl: "https://images.unsplash.com/photo-1555993539-1732b0258235?w=800",
+      coverImageUrl: "/images/travel-seville.jpg",
       summary: "Seville is the most romantic city in Spain — orange trees, flamenco echoing from bars, and the largest Gothic cathedral in the world.",
       tags: ["Europe", "history", "food", "flamenco"],
       itinerary: [
@@ -353,7 +353,7 @@ async function seed() {
       city: "Canmore",
       region: "Alberta",
       visitedYear: 2025,
-      coverImageUrl: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800",
+      coverImageUrl: "/images/travel-canmore.jpg",
       summary: "Canmore is what Banff would be if you took out the tourists and added more locals who actually hike. It's my kind of mountain town.",
       tags: ["North America", "mountains", "hiking", "outdoors"],
       itinerary: [
@@ -673,7 +673,7 @@ async function seed() {
       city: "Wilmington",
       region: "North Carolina",
       visitedYear: 2024,
-      coverImageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800",
+      coverImageUrl: "/images/travel-wilmington.jpg",
       summary: "Wilmington has the walkable charm of a coastal city that hasn't been entirely discovered yet — a riverfront, good food, and Wrightsville Beach just minutes away.",
       tags: ["USA", "beaches", "food", "culture", "NC"],
       itinerary: [],
