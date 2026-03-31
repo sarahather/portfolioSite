@@ -16,13 +16,15 @@ export default function TravelsPage() {
 
   const regions = ["All", "USA", "Asia", "Europe", "Americas"];
 
-  const filtered = travels?.filter(t => {
-    if (activeRegion === "All") return true;
-    if (activeRegion === "Asia") return ASIA.includes(t.country ?? "");
-    if (activeRegion === "Europe") return EUROPE.includes(t.country ?? "");
-    if (activeRegion === "Americas") return AMERICAS.includes(t.country ?? "");
-    return !ASIA.includes(t.country ?? "") && !EUROPE.includes(t.country ?? "") && !AMERICAS.includes(t.country ?? "");
-  });
+  const filtered = travels
+    ?.filter(t => {
+      if (activeRegion === "All") return true;
+      if (activeRegion === "Asia") return ASIA.includes(t.country ?? "");
+      if (activeRegion === "Europe") return EUROPE.includes(t.country ?? "");
+      if (activeRegion === "Americas") return AMERICAS.includes(t.country ?? "");
+      return !ASIA.includes(t.country ?? "") && !EUROPE.includes(t.country ?? "") && !AMERICAS.includes(t.country ?? "");
+    })
+    .sort((a, b) => (a.city ?? "").localeCompare(b.city ?? ""));
 
   return (
     <div className="min-h-screen bg-background">
