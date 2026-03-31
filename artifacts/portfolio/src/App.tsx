@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import ExperiencePage from "@/pages/ExperiencePage";
 import TravelsPage from "@/pages/TravelsPage";
+import TravelCityPage from "@/pages/TravelCityPage";
 import SpeakingPage from "@/pages/SpeakingPage";
 import CraftsPage from "@/pages/CraftsPage";
 import WritingPage from "@/pages/WritingPage";
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/experience" component={ExperiencePage} />
       <Route path="/travels" component={TravelsPage} />
+      <Route path="/travels/:slug" component={TravelCityPage} />
       <Route path="/speaking" component={SpeakingPage} />
       <Route path="/crafts" component={CraftsPage} />
       <Route path="/writing" component={WritingPage} />

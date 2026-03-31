@@ -2,7 +2,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useGetTravel, getGetTravelQueryKey } from "@workspace/api-client-react";
 import type { ItineraryDay } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
+import { Link } from "wouter";
+import { slugify } from "@/lib/slugify";
 
 export function TravelModal({ id, open, onOpenChange }: { id: number | null, open: boolean, onOpenChange: (open: boolean) => void }) {
   const { data, isLoading } = useGetTravel(id as number, {
@@ -77,6 +79,17 @@ export function TravelModal({ id, open, onOpenChange }: { id: number | null, ope
                   <p className="text-sm text-secondary/90 leading-relaxed whitespace-pre-wrap">{data.practicalInfo}</p>
                 </div>
               )}
+
+              <div className="pt-2">
+                <Link
+                  href={`/travels/${slugify(data.city)}`}
+                  onClick={() => onOpenChange(false)}
+                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-semibold text-sm hover:bg-primary/90 transition-colors"
+                >
+                  View Full Guide
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </>
         )}
