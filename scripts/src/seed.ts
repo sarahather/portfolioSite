@@ -336,7 +336,7 @@ async function seed() {
       city: "Banff",
       region: "Alberta",
       visitedYear: 2022,
-      coverImageUrl: "https://images.unsplash.com/photo-1601999009162-2459b53b4fdf?w=800",
+      coverImageUrl: "/images/travel-banff.jpg",
       summary: "Banff looks like it was designed by someone who had never seen nature before and overcorrected wildly. Turquoise lakes, glacier peaks, elk walking downtown.",
       tags: ["North America", "mountains", "hiking", "nature"],
       itinerary: [
@@ -474,7 +474,7 @@ async function seed() {
       city: "Estes Park",
       region: "Colorado",
       visitedYear: 2022,
-      coverImageUrl: "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800",
+      coverImageUrl: "/images/travel-estes-park.jpg",
       summary: "Estes Park is the gateway to Rocky Mountain National Park — moose sightings included.",
       tags: ["USA", "mountains", "hiking", "wildlife"],
       itinerary: [],
@@ -552,6 +552,18 @@ async function seed() {
       itinerary: [],
       highlights: ["Milwaukee Art Museum's Burke Brise Soleil", "Lake Michigan lakefront", "Historic Third Ward"],
       practicalInfo: "Easy 90-minute drive from Chicago. Very underrated weekend trip.",
+    },
+    {
+      country: "France",
+      city: "Paris",
+      region: "Île-de-France",
+      visitedYear: 2023,
+      coverImageUrl: "/images/travel-paris.jpg",
+      summary: "Paris is exactly what everyone says it is, and somehow still manages to exceed expectations. Every arrondissement has a different personality and all of them are beautiful.",
+      tags: ["Europe", "food", "art", "city", "culture"],
+      itinerary: [],
+      highlights: ["Musée d'Orsay over the Louvre", "Canal Saint-Martin neighborhood", "Père Lachaise at golden hour", "Marché des Enfants Rouges"],
+      practicalInfo: "Paris Métro is efficient and inexpensive. Get a carnet of 10 tickets. Most museums are closed on Mondays.",
     },
   ]);
   console.log("  ✓ Travels seeded");
