@@ -292,7 +292,7 @@ export default function Home() {
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl group">
             <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10 group-hover:bg-transparent transition-colors duration-700"></div>
-            <img src="/images/speaking-1.png" alt="Sarah speaking on stage" className="w-full h-full object-cover" />
+            <img src="/images/speaking-google.jpg" alt="Sarah speaking on stage at Google" className="w-full h-full object-cover" />
           </div>
 
           <div>

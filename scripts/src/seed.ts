@@ -569,7 +569,7 @@ async function seed() {
         "Spoke about navigating the tech industry as a Muslim woman, building community through Muslim Women in Technology, and what it takes to show up authentically in spaces not designed for you.",
       slidesUrl: null,
       recordingUrl: "https://www.youtube.com/watch?v=JD13XPwAg74",
-      imageUrl: null,
+      imageUrl: "/images/speaking-panel.jpg",
       upcoming: false,
     },
     {
@@ -611,7 +611,21 @@ async function seed() {
         "Emceed multiple South Asian wedding events and cultural celebrations — keeping the energy alive, honoring traditions, and making every moment feel personal and memorable for families.",
       slidesUrl: null,
       recordingUrl: null,
-      imageUrl: null,
+      imageUrl: "/images/speaking-stage.jpg",
+      upcoming: false,
+    },
+    {
+      eventName: "Coffee, Careers & Connections — Muslim Women's Alliance",
+      talkTitle: "Coffee, Careers & Connections",
+      date: "2019-10-27",
+      location: "Doubletree Hotel, Oak Brook, IL",
+      format: "panel",
+      audience: "Muslim women professionals, students, career-changers",
+      description:
+        "Panelist at the Muslim Women's Alliance's Coffee, Careers & Connections event — a professional networking and mentorship afternoon bringing together Muslim women across industries to share career journeys, offer guidance, and build community.",
+      slidesUrl: null,
+      recordingUrl: null,
+      imageUrl: "/images/speaking-mwa-flyer.jpg",
       upcoming: false,
     },
   ]);
