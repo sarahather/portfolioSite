@@ -654,14 +654,14 @@ async function seed() {
       upcoming: false,
     },
     {
-      eventName: "ABIdotCHI",
-      talkTitle: "Speaker — ABIdotCHI",
+      eventName: "Anita Borg Institute Chicago (ABIdotCHI)",
+      talkTitle: "Speaker — Anita Borg Institute Chicago",
       date: "2016-01-01",
       location: "Google Chicago, Chicago, IL",
       format: "conference talk",
       audience: "Tech students, early-career engineers, women in computing",
       description:
-        "Speaker at ABIdotCHI, the Chicago chapter of the Anita Borg Institute — a community event bringing together women and underrepresented technologists to connect, learn, and lift each other up. Hosted at Google Chicago.",
+        "Speaker at ABIdotCHI — the Chicago chapter of the Anita Borg Institute, an organization dedicated to advancing women in technology. A community event bringing together women and underrepresented technologists to connect, learn, and lift each other up. Hosted at Google Chicago.",
       slidesUrl: null,
       recordingUrl: null,
       imageUrl: null,
