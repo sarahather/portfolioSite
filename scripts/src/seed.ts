@@ -13,7 +13,7 @@ async function seed() {
   await db.insert(workExperienceTable).values([
     {
       company: "CNA Insurance",
-      role: "Software Engineer II",
+      role: "Software Engineer",
       startDate: "2023-04",
       endDate: null,
       current: true,
@@ -27,13 +27,13 @@ async function seed() {
         "Spearheaded production deployments with zero defects and 100% uptime during business hours",
         "Led migration from Concourse to GitHub Actions, reducing deployment cycles by 25%",
       ],
-      technologies: ["React", "JavaScript", "Java", "Spring Boot", "SonarQube", "GitHub Actions", "Postman"],
+      technologies: ["React", "JavaScript", "Java", "Spring Boot", "SonarQube", "GitHub Actions", "Postman", "Claude", "GitHub Copilot", "Adobe Designer", "Echo API"],
       logoUrl: null,
       location: "Chicago, IL",
     },
     {
       company: "CNA Insurance",
-      role: "Software Engineer & Intern Manager",
+      role: "Associate Software Engineer & Intern Manager",
       startDate: "2021-04",
       endDate: "2023-03",
       current: false,

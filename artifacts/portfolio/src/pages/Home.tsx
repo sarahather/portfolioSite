@@ -2,14 +2,11 @@ import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { TravelModal } from "@/components/TravelModal";
 import { WorkExpModal } from "@/components/WorkExpModal";
-import { WritingModal } from "@/components/WritingModal";
 import {
-  useGetPortfolioStats,
   useListWorkExperiences,
   useListTravels,
   useListSpeakingEngagements,
   useListCrafts,
-  useListWritingPosts,
   useSubmitContact
 } from "@workspace/api-client-react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -35,14 +32,11 @@ const contactSchema = z.object({
 export default function Home() {
   const [selectedTravelId, setSelectedTravelId] = useState<number | null>(null);
   const [selectedWorkId, setSelectedWorkId] = useState<number | null>(null);
-  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
-  const { data: stats, isLoading: statsLoading } = useGetPortfolioStats();
   const { data: experiences, isLoading: expLoading } = useListWorkExperiences();
   const { data: travels, isLoading: travelsLoading } = useListTravels();
   const { data: speaking, isLoading: speakingLoading } = useListSpeakingEngagements();
   const { data: crafts, isLoading: craftsLoading } = useListCrafts();
-  const { data: writing, isLoading: writingLoading } = useListWritingPosts();
 
   const submitContact = useSubmitContact();
   const { toast } = useToast();
@@ -89,7 +83,7 @@ export default function Home() {
               Explorer.
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed pt-2">
-              Software engineer, nonprofit co-founder, solo traveler, and maker of handmade things.
+              Software engineer, nonprofit co-founder, traveler, and maker of handmade things.
               I build systems that scale, communities that last, and custom chip bags that honestly might be my best work.
             </p>
             <p className="text-sm text-muted-foreground flex items-center gap-2">
@@ -118,29 +112,20 @@ export default function Home() {
               </a>
             </div>
 
-            {statsLoading ? (
-              <Skeleton className="h-24 w-full max-w-md rounded-xl mt-8" />
-            ) : stats ? (
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border/60 max-w-md">
-                <div>
-                  <div className="text-4xl font-serif text-primary">{stats.yearsExperience}+</div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground mt-2">Years Coding</div>
-                </div>
-                <div>
-                  <div className="text-4xl font-serif text-secondary">{stats.countriesVisited}</div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground mt-2">Destinations</div>
-                </div>
-                <div>
-                  <div className="text-4xl font-serif text-accent">{stats.talkCount}</div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground mt-2">Talks Given</div>
-                </div>
+            <div className="pt-8 border-t border-border/60 max-w-lg">
+              <div className="flex flex-wrap gap-2">
+                {["Software Engineer", "Nonprofit Co-Founder", "Speaker", "Traveler", "Maker"].map(tag => (
+                  <span key={tag} className="px-4 py-2 rounded-full border border-primary/30 text-sm font-medium text-primary bg-primary/5">
+                    {tag}
+                  </span>
+                ))}
               </div>
-            ) : null}
+            </div>
           </div>
           <div className="order-1 md:order-2 relative aspect-[4/5] w-full max-w-md mx-auto animate-in fade-in zoom-in-95 duration-1000 delay-200">
             <div className="absolute inset-0 bg-secondary/20 rounded-2xl -rotate-3 transform transition-transform hover:rotate-0 duration-500"></div>
             <img
-              src="/images/hero.png"
+              src="/images/headshot.png"
               alt="Sarah Ather"
               className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
             />
@@ -214,7 +199,7 @@ export default function Home() {
                     >
                       <div className="flex justify-between items-start mb-4">
                         <div className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full inline-block">
-                          {exp.startDate} — {exp.endDate || "Present"}
+                          {exp.startDate?.slice(0, 4)} — {exp.endDate ? exp.endDate.slice(0, 4) : "Present"}
                         </div>
                         <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                       </div>
@@ -307,7 +292,7 @@ export default function Home() {
           <div>
             <h2 className="text-5xl font-serif mb-6">Voice & Vision</h2>
             <p className="text-xl text-muted-foreground mb-10 leading-relaxed">
-              I speak about engineering leadership, building inclusive tech communities, and navigating the industry as a first-generation Muslim woman in STEM.
+              I speak about developing and valuing your perspective, building inclusive tech communities, and navigating the industry as a first-generation Muslim woman in Tech.
               I've also been known to emcee a wedding or two.
             </p>
 
@@ -398,43 +383,24 @@ export default function Home() {
             <div className="text-sm uppercase tracking-widest text-muted-foreground hidden md:block">Thoughts & Essays</div>
           </div>
 
-          {writingLoading ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-              {[1, 2].map(i => <Skeleton key={i} className="h-72 rounded-2xl" />)}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-              {writing?.slice(0, 2).map((post, idx) => (
-                <div
-                  key={post.id}
-                  className="group flex flex-col sm:flex-row gap-8 bg-card p-6 rounded-3xl border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 cursor-pointer"
-                  onClick={() => setSelectedPostId(post.id)}
-                >
-                  <div className="w-full sm:w-2/5 aspect-[4/3] rounded-2xl overflow-hidden shrink-0">
-                    <img
-                      src={idx === 0 ? "/images/writing-1.png" : "/images/writing-2.png"}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center py-2">
-                    <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-primary mb-3">
-                      <span>{post.readingTimeMinutes} min read</span>
-                      <span className="w-1 h-1 rounded-full bg-primary/50"></span>
-                      <span className="text-muted-foreground">{post.publishedAt || "Draft"}</span>
-                    </div>
-                    <h3 className="text-2xl font-serif font-bold mb-4 leading-snug group-hover:text-primary transition-colors">{post.title}</h3>
-                    <p className="text-muted-foreground text-sm line-clamp-2 mb-6 leading-relaxed">{post.excerpt}</p>
-                    <div className="mt-auto">
-                      <span className="text-sm font-bold uppercase tracking-wider flex items-center gap-2 group-hover:text-primary transition-colors">
-                        Read essay <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              { label: "Career & Leadership", topic: "On mentorship, intern programs, and what nobody tells you about climbing the ladder." },
+              { label: "Travel & Identity", topic: "Dispatches from 30+ destinations — what it means to move through the world as yourself." },
+              { label: "Building in Community", topic: "Lessons from co-founding a nonprofit, organizing tech talks, and making space where there wasn't one." },
+            ].map(({ label, topic }) => (
+              <div key={label} className="bg-card border border-dashed border-border/80 rounded-3xl p-8 flex flex-col gap-4 opacity-80">
+                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+                  <BookOpen className="w-5 h-5 text-muted-foreground" />
                 </div>
-              ))}
-            </div>
-          )}
+                <div className="text-xs font-bold uppercase tracking-widest text-secondary">{label}</div>
+                <p className="text-muted-foreground text-sm leading-relaxed">{topic}</p>
+                <div className="mt-auto pt-4 border-t border-border/50">
+                  <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Essay Coming Soon</span>
+                </div>
+              </div>
+            ))}
+          </div>
 
           {/* Publications */}
           <div className="mt-16 max-w-6xl mx-auto">
@@ -640,11 +606,6 @@ export default function Home() {
         id={selectedWorkId}
         open={!!selectedWorkId}
         onOpenChange={(o) => !o && setSelectedWorkId(null)}
-      />
-      <WritingModal
-        id={selectedPostId}
-        open={!!selectedPostId}
-        onOpenChange={(o) => !o && setSelectedPostId(null)}
       />
     </div>
   );
