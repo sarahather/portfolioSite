@@ -1,27 +1,15 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useGetWritingPost, getGetWritingPostQueryKey } from "@workspace/api-client-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { writings } from "@workspace/content";
+import type { Writing } from "@workspace/content";
 import { BookOpen } from "lucide-react";
 
 export function WritingModal({ id, open, onOpenChange }: { id: number | null, open: boolean, onOpenChange: (open: boolean) => void }) {
-  const { data, isLoading } = useGetWritingPost(id as number, {
-    query: {
-      enabled: !!id && open,
-      queryKey: getGetWritingPostQueryKey(id as number)
-    }
-  });
+  const data: Writing | null = id ? writings.find(w => w.id === id) ?? null : null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl bg-card border-border/50 max-h-[85vh] overflow-y-auto">
-        {isLoading || !data ? (
-          <div className="space-y-4 pt-6">
-            <Skeleton className="h-64 w-full rounded-xl" />
-            <Skeleton className="h-8 w-1/2" />
-            <Skeleton className="h-4 w-1/3" />
-            <Skeleton className="h-48 w-full" />
-          </div>
-        ) : (
+        {!data ? null : (
           <>
             <div className="space-y-6">
               {data.imageUrl && (

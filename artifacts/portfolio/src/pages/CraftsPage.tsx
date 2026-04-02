@@ -1,11 +1,8 @@
 import { NavBar } from "@/components/NavBar";
-import { useListCrafts } from "@workspace/api-client-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { crafts } from "@workspace/content";
 import { Link } from "wouter";
 
 export default function CraftsPage() {
-  const { data: crafts, isLoading } = useListCrafts();
-
   return (
     <div className="min-h-screen bg-background">
       <NavBar />
@@ -22,43 +19,37 @@ export default function CraftsPage() {
 
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
-          {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, i) => <Skeleton key={i} className="aspect-square rounded-2xl" />)}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {crafts?.map(craft => (
-                <div key={craft.id} className="group flex flex-col bg-card border border-border/50 rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-300">
-                  <div className="relative aspect-square overflow-hidden">
-                    <img
-                      src={craft.imageUrl || "/images/craft-chips-bag.jpg"}
-                      alt={craft.name ?? ""}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-background/90 backdrop-blur-sm text-xs font-bold uppercase tracking-widest text-secondary px-3 py-1 rounded-full">
-                        {craft.category}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <h3 className="text-xl font-serif font-bold mb-3">{craft.name}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">{craft.description}</p>
-                    {craft.tags && craft.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {craft.tags.map(tag => (
-                          <span key={tag} className="text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-md">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {crafts.map(craft => (
+              <div key={craft.id} className="group flex flex-col bg-card border border-border/50 rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-300">
+                <div className="relative aspect-square overflow-hidden">
+                  <img
+                    src={craft.imageUrl || "/images/craft-chips-bag.jpg"}
+                    alt={craft.name ?? ""}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-background/90 backdrop-blur-sm text-xs font-bold uppercase tracking-widest text-secondary px-3 py-1 rounded-full">
+                      {craft.category}
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
-          )}
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-xl font-serif font-bold mb-3">{craft.name}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1">{craft.description}</p>
+                  {craft.tags && craft.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {craft.tags.map(tag => (
+                        <span key={tag} className="text-xs bg-muted text-muted-foreground px-2.5 py-1 rounded-md">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

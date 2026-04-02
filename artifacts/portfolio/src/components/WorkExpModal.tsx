@@ -1,26 +1,14 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useGetWorkExperience, getGetWorkExperienceQueryKey } from "@workspace/api-client-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { workExperiences } from "@workspace/content";
 import { Building2 } from "lucide-react";
 
 export function WorkExpModal({ id, open, onOpenChange }: { id: number | null, open: boolean, onOpenChange: (open: boolean) => void }) {
-  const { data, isLoading } = useGetWorkExperience(id as number, {
-    query: {
-      enabled: !!id && open,
-      queryKey: getGetWorkExperienceQueryKey(id as number)
-    }
-  });
+  const data = id ? workExperiences.find(e => e.id === id) ?? null : null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl bg-card border-border/50">
-        {isLoading || !data ? (
-          <div className="space-y-4 pt-6">
-            <Skeleton className="h-8 w-1/2" />
-            <Skeleton className="h-4 w-1/3" />
-            <Skeleton className="h-32 w-full" />
-          </div>
-        ) : (
+        {!data ? null : (
           <>
             <DialogHeader>
               <div className="flex items-center gap-4 mb-2">

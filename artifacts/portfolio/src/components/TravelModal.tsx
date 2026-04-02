@@ -1,30 +1,17 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useGetTravel, getGetTravelQueryKey } from "@workspace/api-client-react";
-import type { ItineraryDay } from "@workspace/api-client-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { travels } from "@workspace/content";
+import type { ItineraryDay } from "@workspace/content";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { slugify } from "@/lib/slugify";
 
 export function TravelModal({ id, open, onOpenChange }: { id: number | null, open: boolean, onOpenChange: (open: boolean) => void }) {
-  const { data, isLoading } = useGetTravel(id as number, {
-    query: {
-      enabled: !!id && open,
-      queryKey: getGetTravelQueryKey(id as number)
-    }
-  });
+  const data = id ? travels.find(t => t.id === id) ?? null : null;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl bg-card border-border/50 max-h-[85vh] overflow-y-auto">
-        {isLoading || !data ? (
-          <div className="space-y-4 pt-6">
-            <Skeleton className="h-64 w-full rounded-xl" />
-            <Skeleton className="h-8 w-1/2" />
-            <Skeleton className="h-4 w-1/3" />
-            <Skeleton className="h-24 w-full" />
-          </div>
-        ) : (
+        {!data ? null : (
           <>
             <DialogHeader>
               <DialogTitle className="text-3xl font-serif">{data.city}, {data.country}</DialogTitle>
@@ -37,9 +24,9 @@ export function TravelModal({ id, open, onOpenChange }: { id: number | null, ope
               <div className="aspect-[21/9] rounded-xl overflow-hidden shadow-sm">
                 <img src={data.coverImageUrl || "/images/travel-1.png"} alt={data.city} className="w-full h-full object-cover" />
               </div>
-              {(data as any).secondaryImageUrl && (
+              {data.secondaryImageUrl && (
                 <div className="aspect-[21/9] rounded-xl overflow-hidden shadow-sm">
-                  <img src={(data as any).secondaryImageUrl} alt={`${data.city} — more`} className="w-full h-full object-cover" />
+                  <img src={data.secondaryImageUrl} alt={`${data.city} — more`} className="w-full h-full object-cover" />
                 </div>
               )}
               <div>

@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
-import { useSubmitContact } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +10,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Linkedin, Calendar } from "lucide-react";
 
+const FORMSPREE_FORM_ID = import.meta.env.VITE_FORMSPREE_FORM_ID as string | undefined;
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email"),
@@ -18,23 +20,39 @@ const contactSchema = z.object({
 });
 
 export default function ContactPage() {
-  const submitContact = useSubmitContact();
   const { toast } = useToast();
+  const [isPending, setIsPending] = useState(false);
+
   const form = useForm<z.infer<typeof contactSchema>>({
     resolver: zodResolver(contactSchema),
     defaultValues: { name: "", email: "", subject: "", message: "" },
   });
 
-  const onSubmit = (data: z.infer<typeof contactSchema>) => {
-    submitContact.mutate({ data }, {
-      onSuccess: () => {
+  const onSubmit = async (data: z.infer<typeof contactSchema>) => {
+    if (!FORMSPREE_FORM_ID) {
+      toast({ title: "Configuration error", description: "Contact form is not configured yet.", variant: "destructive" });
+      return;
+    }
+
+    setIsPending(true);
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
         toast({ title: "Message sent!", description: "I'll get back to you soon." });
         form.reset();
-      },
-      onError: () => {
+      } else {
         toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
-      },
-    });
+      }
+    } catch {
+      toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
@@ -150,10 +168,10 @@ export default function ContactPage() {
                 )} />
                 <button
                   type="submit"
-                  disabled={submitContact.isPending}
+                  disabled={isPending}
                   className="w-full bg-primary text-primary-foreground py-4 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-primary/90 transition-colors disabled:opacity-50"
                 >
-                  {submitContact.isPending ? "Sending..." : "Send Message"}
+                  {isPending ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </Form>

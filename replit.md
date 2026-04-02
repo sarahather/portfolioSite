@@ -2,7 +2,7 @@
 
 ## Overview
 
-pnpm workspace monorepo using TypeScript. Personal portfolio website for a software engineer with a rich career, travels, speaking engagements, handmade crafts, and writing.
+pnpm workspace monorepo using TypeScript. Personal portfolio website for Sarah Ather — a software engineer with a rich career, travels, speaking engagements, handmade crafts, and writing. The portfolio is fully static (no database or API server required) and deployable to Vercel for free.
 
 ## Stack
 
@@ -10,62 +10,48 @@ pnpm workspace monorepo using TypeScript. Personal portfolio website for a softw
 - **Node.js version**: 24
 - **Package manager**: pnpm
 - **TypeScript version**: 5.9
-- **API framework**: Express 5 (Node.js backend)
-- **Database**: PostgreSQL + Drizzle ORM
-- **Validation**: Zod (`zod/v4`), `drizzle-zod`
-- **API codegen**: Orval (from OpenAPI spec)
-- **Build**: esbuild (CJS bundle)
 - **Frontend**: React + Vite (portfolio site)
 - **Frontend Routing**: Wouter
-- **Frontend State**: TanStack React Query
 - **Styling**: Tailwind CSS v4 + shadcn/ui
+- **Contact Form**: Formspree (free third-party service, no backend needed)
+- **Deployment**: Vercel (free tier), custom domain: sarahather.com
 
 ## Structure
 
 ```text
 artifacts-monorepo/
 ├── artifacts/
-│   ├── api-server/         # Express API server (backend for portfolio)
 │   └── portfolio/          # React + Vite portfolio frontend (served at /)
 ├── lib/                    # Shared libraries
-│   ├── api-spec/           # OpenAPI spec + Orval codegen config
-│   ├── api-client-react/   # Generated React Query hooks
-│   ├── api-zod/            # Generated Zod schemas from OpenAPI
-│   └── db/                 # Drizzle ORM schema + DB connection
+│   ├── content/            # Static TypeScript data files (work experience, travels, speaking, crafts, writing)
+│   ├── api-spec/           # OpenAPI spec + Orval codegen config (legacy, unused)
+│   ├── api-client-react/   # Generated React Query hooks (legacy, unused)
+│   └── api-zod/            # Generated Zod schemas from OpenAPI (legacy, unused)
 ├── scripts/                # Utility scripts
+├── DEPLOYMENT.md           # Step-by-step Vercel + GoDaddy DNS instructions
 ├── pnpm-workspace.yaml
 ├── tsconfig.base.json
 ├── tsconfig.json
 └── package.json
 ```
 
-## Portfolio API Endpoints
+## Content Management
 
-All endpoints are served at `/api`:
+All portfolio content is stored as TypeScript arrays in `lib/content/src/`:
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | /api/healthz | Health check |
-| GET | /api/stats | Portfolio summary stats (experience, travel, talks, crafts, writing, mentees) |
-| GET | /api/work-experience | All work experiences (reverse chronological) |
-| GET | /api/work-experience/:id | Single work experience |
-| GET | /api/travels | All travel destinations (preview info) |
-| GET | /api/travels/:id | Single travel destination with full itinerary |
-| GET | /api/speaking | All speaking engagements |
-| GET | /api/crafts | All craft products |
-| GET | /api/writing | All published writing posts |
-| GET | /api/writing/:id | Single writing post |
-| POST | /api/contact | Submit a contact form (categories: speaking, recruiting, crafts, general) |
+| File | Content |
+|------|---------|
+| `work-experience.ts` | Career timeline entries with highlights, technologies |
+| `travels.ts` | Travel destinations with itineraries, highlights, practical info |
+| `speaking.ts` | Speaking engagements with event details |
+| `crafts.ts` | Handmade craft products with categories and tags |
+| `writing.ts` | Blog posts/essays (currently empty — coming soon) |
 
-## Database Schema
+To update content, edit the TypeScript file directly and redeploy.
 
-Tables:
-- `work_experience` — Career timeline entries with highlights, technologies
-- `travels` — Travel destinations with JSONB itinerary field
-- `speaking` — Speaking engagements with event details and URLs
-- `crafts` — Handmade craft products with categories and tags
-- `writing` — Blog posts/articles with drafts support
-- `contact_submissions` — Contact form submissions
+## Contact Form
+
+The contact form uses [Formspree](https://formspree.io) — a free third-party service that emails the site owner when someone submits the form. The form ID is configured via the `VITE_FORMSPREE_FORM_ID` environment variable. See `DEPLOYMENT.md` for setup instructions.
 
 ## TypeScript & Composite Projects
 
@@ -74,6 +60,7 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 - **Always typecheck from the root** — run `pnpm run typecheck` (which runs `tsc --build --emitDeclarationOnly`).
 - **`emitDeclarationOnly`** — only emit `.d.ts` files during typecheck.
 - **Project references** — when package A depends on package B, A's `tsconfig.json` must list B in its `references` array.
+- **Build declarations first** — run `tsc --build lib/content/tsconfig.json` before running portfolio typecheck if declarations are missing.
 
 ## Root Scripts
 
@@ -84,44 +71,24 @@ Every package extends `tsconfig.base.json` which sets `composite: true`. The roo
 
 ### `artifacts/portfolio` (`@workspace/portfolio`)
 
-React + Vite portfolio frontend served at `/`. Single-page scrollable site with sections: Hero, Work Experience, Travels, Speaking, Crafts, Writing, Contact.
+React + Vite portfolio frontend served at `/`. Fully static — no API calls for data. Content imported directly from `@workspace/content`.
 
 - Entry: `src/main.tsx` → `src/App.tsx` 
-- Pages: `src/pages/` (single main `index.tsx` / `Portfolio.tsx`)
-- Components: `src/components/` (section components + modals)
+- Pages: `src/pages/`
+- Components: `src/components/`
+- `vercel.json` at artifact root — configures Vercel SPA deployment (root directory = `artifacts/portfolio`)
+- `VITE_FORMSPREE_FORM_ID` env var required for contact form
 - `pnpm --filter @workspace/portfolio run dev` — run dev server
+- `pnpm --filter @workspace/portfolio run build` — production build
 
-### `artifacts/api-server` (`@workspace/api-server`)
+### `lib/content` (`@workspace/content`)
 
-Express 5 API server. Routes live in `src/routes/`.
+Static TypeScript data files for all portfolio content types. No external dependencies — just pure TypeScript. Run `tsc --build lib/content/tsconfig.json` to emit `.d.ts` declaration files to `lib/content/dist/`.
 
-- Entry: `src/index.ts` — reads `PORT`, starts Express
-- App setup: `src/app.ts` — mounts CORS, JSON parsing, routes at `/api`
-- Routes: `src/routes/index.ts` mounts all sub-routers
-- Depends on: `@workspace/db`, `@workspace/api-zod`
-- `pnpm --filter @workspace/api-server run dev` — run the dev server
+### `lib/api-spec`, `lib/api-zod`, `lib/api-client-react` (legacy, unused)
 
-### `lib/db` (`@workspace/db`)
-
-Database layer using Drizzle ORM with PostgreSQL.
-
-- `src/schema/index.ts` — barrel re-export of all models
-- `pnpm --filter @workspace/db run push` — push schema changes to database
-
-### `lib/api-spec` (`@workspace/api-spec`)
-
-Owns the OpenAPI 3.1 spec (`openapi.yaml`) and the Orval config. Run codegen: `pnpm --filter @workspace/api-spec run codegen`
-
-### `lib/api-zod` (`@workspace/api-zod`)
-
-Generated Zod schemas from the OpenAPI spec.
-
-### `lib/api-client-react` (`@workspace/api-client-react`)
-
-Generated React Query hooks and fetch client from the OpenAPI spec.
+Legacy packages left in the repo. Not referenced by the portfolio or any active package.
 
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package.
-
-- `pnpm --filter @workspace/scripts run seed` — seed the database with realistic portfolio data (idempotent, safe to re-run)

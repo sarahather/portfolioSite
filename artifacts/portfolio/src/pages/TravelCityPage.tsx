@@ -1,8 +1,7 @@
 import { useRoute, Link } from "wouter";
-import { useGetTravel, useListTravels } from "@workspace/api-client-react";
-import type { ItineraryDay } from "@workspace/api-client-react";
+import { travels } from "@workspace/content";
+import type { ItineraryDay } from "@workspace/content";
 import { NavBar } from "@/components/NavBar";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, MapPin, Calendar, Star } from "lucide-react";
 import { slugify } from "@/lib/slugify";
 
@@ -10,29 +9,13 @@ export default function TravelCityPage() {
   const [, params] = useRoute("/travels/:slug");
   const urlSlug = params?.slug ?? "";
 
-  const { data: allTravels } = useListTravels();
-  const matched = allTravels?.find(t => slugify(t.city) === urlSlug);
-  const id = matched?.id ?? null;
-
-  const { data, isLoading } = useGetTravel(id as number, {
-    query: { enabled: !!id },
-  });
-
-  const isResolving = !allTravels || (!!id && isLoading);
+  const data = travels.find(t => slugify(t.city) === urlSlug) ?? null;
 
   return (
     <div className="min-h-screen bg-background">
       <NavBar />
 
-      {isResolving ? (
-        <div className="pt-24 pb-16 container mx-auto max-w-4xl px-6 space-y-6">
-          <Skeleton className="h-6 w-32" />
-          <Skeleton className="h-[480px] w-full rounded-2xl" />
-          <Skeleton className="h-10 w-64" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-3/4" />
-        </div>
-      ) : !data ? (
+      {!data ? (
         <div className="pt-40 text-center text-muted-foreground">
           <p className="text-xl">City not found.</p>
           <Link href="/travels" className="mt-4 inline-flex items-center gap-2 text-primary hover:underline">
@@ -76,9 +59,9 @@ export default function TravelCityPage() {
 
             {(() => {
               const allPhotos: string[] = [
-                (data as any).secondaryImageUrl,
-                ...((data as any).galleryImages ?? []),
-              ].filter(Boolean);
+                data.secondaryImageUrl,
+                ...(data.galleryImages ?? []),
+              ].filter(Boolean) as string[];
               if (allPhotos.length === 0) return null;
               if (allPhotos.length === 1) return (
                 <div className="aspect-[16/9] rounded-2xl overflow-hidden">

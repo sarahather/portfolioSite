@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { WorkExpModal } from "@/components/WorkExpModal";
-import { useListWorkExperiences } from "@workspace/api-client-react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowUpRight, GraduationCap, BookOpen, ExternalLink, MapPin } from "lucide-react";
+import { workExperiences } from "@workspace/content";
+import { ArrowUpRight, BookOpen, ExternalLink, MapPin } from "lucide-react";
 
 export default function ExperiencePage() {
   const [selectedWorkId, setSelectedWorkId] = useState<number | null>(null);
-  const { data: experiences, isLoading } = useListWorkExperiences();
 
   return (
     <div className="min-h-screen bg-background">
@@ -25,64 +23,58 @@ export default function ExperiencePage() {
 
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-4xl">
-          {isLoading ? (
-            <div className="space-y-8">
-              {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-64 w-full rounded-2xl" />)}
-            </div>
-          ) : (
-            <div className="space-y-8">
-              {experiences?.map((exp) => (
-                <div
-                  key={exp.id}
-                  className="bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                  onClick={() => setSelectedWorkId(exp.id)}
-                >
-                  <div className="flex items-start justify-between gap-4 mb-6">
-                    <div>
-                      <div className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full inline-block mb-3">
-                        {exp.startDate?.slice(0, 4)} — {exp.endDate ? exp.endDate.slice(0, 4) : "Present"}
-                        {exp.current && <span className="ml-2 text-secondary">· Current</span>}
-                      </div>
-                      <h2 className="text-2xl font-serif font-bold mb-1 group-hover:text-primary transition-colors">{exp.role}</h2>
-                      <div className="text-muted-foreground font-medium flex items-center gap-2">
-                        <span>{exp.company}</span>
-                        {exp.location && (
-                          <>
-                            <span>·</span>
-                            <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{exp.location}</span>
-                          </>
-                        )}
-                      </div>
+          <div className="space-y-8">
+            {workExperiences.map((exp) => (
+              <div
+                key={exp.id}
+                className="bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                onClick={() => setSelectedWorkId(exp.id)}
+              >
+                <div className="flex items-start justify-between gap-4 mb-6">
+                  <div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full inline-block mb-3">
+                      {exp.startDate?.slice(0, 4)} — {exp.endDate ? exp.endDate.slice(0, 4) : "Present"}
+                      {exp.current && <span className="ml-2 text-secondary">· Current</span>}
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 mt-1" />
+                    <h2 className="text-2xl font-serif font-bold mb-1 group-hover:text-primary transition-colors">{exp.role}</h2>
+                    <div className="text-muted-foreground font-medium flex items-center gap-2">
+                      <span>{exp.company}</span>
+                      {exp.location && (
+                        <>
+                          <span>·</span>
+                          <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{exp.location}</span>
+                        </>
+                      )}
+                    </div>
                   </div>
-
-                  <p className="text-foreground/80 leading-relaxed mb-6">{exp.description}</p>
-
-                  {exp.highlights && exp.highlights.length > 0 && (
-                    <ul className="space-y-2 mb-6">
-                      {exp.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm text-foreground/70">
-                          <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0"></span>
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-
-                  {exp.technologies && exp.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map(tech => (
-                        <span key={tech} className="px-3 py-1 bg-secondary/10 text-secondary text-xs font-medium rounded-md">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 mt-1" />
                 </div>
-              ))}
-            </div>
-          )}
+
+                <p className="text-foreground/80 leading-relaxed mb-6">{exp.description}</p>
+
+                {exp.highlights && exp.highlights.length > 0 && (
+                  <ul className="space-y-2 mb-6">
+                    {exp.highlights.map((h, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-foreground/70">
+                        <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0"></span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {exp.technologies && exp.technologies.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map(tech => (
+                      <span key={tech} className="px-3 py-1 bg-secondary/10 text-secondary text-xs font-medium rounded-md">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
